@@ -1,20 +1,9 @@
-import React, { ReactNode } from 'react';
-import { Table, ToastHeader } from 'reactstrap';
+import React, { ReactNode, useState, Fragment } from 'react';
+import { Table, ToastHeader, Modal, ModalBody, ModalHeader, ModalFooter, Button, Row } from 'reactstrap';
 import { applicant } from '../../Types/types';
 
 interface Props{
     applicants: Array<applicant>
-}
-
-
-const styles = {
-    tableStyle: {
-        marginTop: '100px'
-    },
-    ToastHeaderStyle: {
-        backgroundColor: 'transparent',
-        border: 'none'
-    }
 }
 
 enum CreditStatus {
@@ -23,20 +12,37 @@ enum CreditStatus {
     Neutral = "Neutral",
 }
 
-const renderCreditStatus = (credit: number): ReactNode => {
-   
+const renderCreditStatus = (credit: number | undefined): ReactNode => {
+    if (credit === undefined) return <Fragment />;
     if (credit >= 0 && credit <= 5) {
-    return <ToastHeader icon="danger" style={styles.ToastHeaderStyle}>{CreditStatus.Bad}</ToastHeader>
+    return <ToastHeader icon="danger" className="applicant-table-toast">{CreditStatus.Bad}</ToastHeader>
     } else if (credit > 5 && credit <= 7) {
-    return <ToastHeader icon="warning" style={styles.ToastHeaderStyle}>{CreditStatus.Neutral}</ToastHeader>
+    return <ToastHeader icon="warning" className="applicant-table-toast">{CreditStatus.Neutral}</ToastHeader>
     } else {
-    return <ToastHeader icon="success" style={styles.ToastHeaderStyle}>{CreditStatus.Good}</ToastHeader>
+    return <ToastHeader icon="success" className="applicant-table-toast">{CreditStatus.Good}</ToastHeader>
     }
 }
 
 const ApplicantTable: React.FC<Props> = (props) => {
+    const [modal, setModal] = React.useState<boolean>(false);
+    const [selectedApplicant, setSelectedApplicant] = React.useState<applicant | null>(null);
+    
+    const toggle = () => setModal(!modal)
+    const handleRowClick = (applicant: applicant) => {
+        setSelectedApplicant(applicant);
+        toggle();
+    }
     return (
-        <Table responsive bordered striped style={styles.tableStyle}>
+        <Table responsive bordered striped className="applicant-table">
+            <Modal isOpen={modal} toggle={toggle}>
+                <ModalHeader>Applicant Info</ModalHeader>
+                <ModalBody>
+                    <p>Fullname: {`${selectedApplicant?.first_name} ${selectedApplicant?.last_name}`}</p>
+                    <p>Credit Indicator Store: {`${selectedApplicant?.credit_indicator}`}</p>
+                    <p className="v-center">Credit Status:{renderCreditStatus(selectedApplicant?.credit_indicator)}</p>
+                </ModalBody>
+                <ModalFooter><Button color="secondary" onClick={toggle}>Close</Button></ModalFooter>
+            </Modal>
             <thead>
                 <tr>
                     <th>Status</th>
@@ -48,7 +54,7 @@ const ApplicantTable: React.FC<Props> = (props) => {
             <tbody>
                 { props.applicants.map(applicant => {
                     return (
-                        <tr key={applicant.id}>
+                        <tr key={applicant.id} onClick={() => handleRowClick(applicant)} className="applicant-table-row">
                             <td>{renderCreditStatus(applicant.credit_indicator)}</td>
                             <td>{applicant.first_name}</td>
                             <td>{applicant.last_name}</td>

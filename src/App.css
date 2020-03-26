@@ -16,3 +16,16 @@ p {
   display: flex;
   justify-content: center;
 }
+
+.applicant-table-row:hover {
+  cursor: pointer;
+}
+
+.applicant-table-toast {
+  background-color: transparent !important;
+  border: none !important;
+}
+
+.applicant-table {
+  margin-top: 75px;
+}

@@ -3,7 +3,6 @@ import { applicant, filter, CreditScoreFilter } from '../../Types/types';
 import { Table, Loader, Filter } from '../../Components';
 import { Container } from 'reactstrap';
 
-
 interface State {
   applicants: Array<applicant>,
   filteredApplicants: Array<applicant>,
@@ -23,7 +22,6 @@ const initalState: State = {
 
 class Home extends Component<{}, State> {
   state: State = initalState
-	
   async componentDidMount() {
     const url = "http://private-041255-sakura3.apiary-mock.com/applicants";
 		this.setState({ isLoading: true })
@@ -70,7 +68,6 @@ class Home extends Component<{}, State> {
     filteredApplicants = this.filterApplicantsByCredit(filteredApplicants, creditFilter);
     return filteredApplicants;
   } 
-
 
   handleNameFilterChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const input = e.target.value;
