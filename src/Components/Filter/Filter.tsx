@@ -21,7 +21,7 @@ const styles = {
 }
 
 const Filter: React.FC<Props> = (props) => {
-    const [dropdownOpen, setDropdownOpen] = React.useState<boolean>(false);
+    const [dropdownOpen, setDropdownOpen] = useState<boolean>(false);
     const toggleDropDown = () => setDropdownOpen(!dropdownOpen)
     const { applyedFilters, handleNameFilterChange, handleCreditFilterChange } = props;
     const creditFilters: Array<string> = Object.values(CreditScoreFilter);

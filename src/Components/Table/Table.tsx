@@ -1,5 +1,5 @@
 import React, { ReactNode, useState, Fragment } from 'react';
-import { Table, ToastHeader, Modal, ModalBody, ModalHeader, ModalFooter, Button, Row } from 'reactstrap';
+import { Table, ToastHeader, Modal, ModalBody, ModalHeader, ModalFooter, Button } from 'reactstrap';
 import { applicant } from '../../Types/types';
 
 interface Props{
@@ -24,8 +24,8 @@ const renderCreditStatus = (credit: number | undefined): ReactNode => {
 }
 
 const ApplicantTable: React.FC<Props> = (props) => {
-    const [modal, setModal] = React.useState<boolean>(false);
-    const [selectedApplicant, setSelectedApplicant] = React.useState<applicant | null>(null);
+    const [modal, setModal] = useState<boolean>(false);
+    const [selectedApplicant, setSelectedApplicant] = useState<applicant | undefined>(undefined);
     
     const toggle = () => setModal(!modal)
     const handleRowClick = (applicant: applicant) => {
