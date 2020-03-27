@@ -46,10 +46,9 @@ const Filter: React.FC<Props> = (props) => {
                     </DropdownMenu>
                 </InputGroupButtonDropdown>
             </InputGroup>
-            <Button className="clear-filter-btn" color="danger" onClick={props.clearAllFilters}>Clear</Button>
+            <Button className="clear-filter-btn" color="danger" onClick={props.clearAllFilters}>Clear Filters</Button>
         </div>
     )
 }
-
 
 export default Filter;
