@@ -35,7 +35,7 @@ const ApplicantTable: React.FC<Props> = (props) => {
     return (
         <Table responsive bordered striped className="applicant-table">
             <Modal isOpen={modal} toggle={toggle}>
-                <ModalHeader>Applicant Info</ModalHeader>
+                <ModalHeader>Applicant Information</ModalHeader>
                 <ModalBody>
                     <p>Fullname: {`${selectedApplicant?.first_name} ${selectedApplicant?.last_name}`}</p>
                     <p>Credit Indicator Store: {`${selectedApplicant?.credit_indicator}`}</p>

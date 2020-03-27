@@ -7,7 +7,6 @@ p {
 
 
 .v-center {
-  min-height: 100%;  
   display: flex;
   align-items: center;
 }
@@ -28,4 +27,8 @@ p {
 
 .applicant-table {
   margin-top: 75px;
+}
+
+.clear-filter-btn {
+  margin-left: 30px;
 }
